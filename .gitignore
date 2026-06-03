@@ -40,5 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Github
-.gitignore
+# CLAUDE
+.claude/
+.remember/
+CLAUDE.md
+AGENTS.md
+impeccable.md
