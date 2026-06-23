@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
+@theme {
+  /* Cores */
+  --color-dark: #151515; /* fundo principal */
+  --color-cream: #f4eded; /* accent/destaque */
+  --color-white: #fefefe; /* textos e ícones */
+  --color-muted: #676767; /* textos secundários */
+  --color-light: #fafafa; /* fundos alternativos */
+
+  /* Fontes (mapeadas das variáveis do next/font) */
+  --font-archivo: var(--font-archivo-black), sans-serif; /* títulos */
+  --font-montserrat: var(--font-montserrat-base), sans-serif; /* corpo */
+  --font-sans: var(--font-montserrat-base), sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background: var(--color-dark);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+/* Texto vazado (USER / NAME do hero, título PROJETOS) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-white);
+}
+
+/* Container de scroll no modo "reels" (mobile): cada painel ocupa a tela
+   e o scroll faz snap de um para o outro. */
+.reels-scroll {
+  scroll-snap-type: y mandatory;
+}
+.reels-panel {
+  scroll-snap-align: start;
 }
