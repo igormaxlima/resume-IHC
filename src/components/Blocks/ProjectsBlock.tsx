@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { useScroll } from "motion/react";
 import SectionTitle from "@/components/Ui/SectionTitle";
 import ProjectCard from "@/components/Ui/ProjectCard";
-import VerticalProgress from "@/components/Ui/VerticalProgress";
 import { projects } from "@/data/projects";
 
 interface ProjectsBlockProps {
@@ -13,7 +12,7 @@ interface ProjectsBlockProps {
 
 /**
  * PROJETOS — sobe sobrepondo as Experiências (desktop) via `-mt-[100vh]` + z-20.
- * Trilho de progresso vertical na lateral esquerda e grid de cards.
+ * O título fica fixo no TOPO da página (com sticky), enquanto o grid de cards rola por baixo.
  */
 export default function ProjectsBlock({ isDesktop }: ProjectsBlockProps) {
   const ref = useRef<HTMLElement>(null);
@@ -26,24 +25,30 @@ export default function ProjectsBlock({ isDesktop }: ProjectsBlockProps) {
     <section
       ref={ref}
       id="projetos"
-      className={`relative flex bg-dark ${
-        isDesktop ? "z-20 -mt-[100vh]" : "reels-panel"
+      className={`relative bg-dark flex flex-col ${
+        isDesktop ? "z-20 -mt-[100vh] px-12 lg:px-24" : "reels-panel px-8"
       }`}
+      style={{
+        maskImage: "linear-gradient(to bottom, transparent 0%, black 10vh)",
+        WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 15vh)",
+      }}
     >
-      {/* trilho de progresso (lateral esquerda, fixo enquanto rola) */}
-      <div className="sticky top-0 hidden h-screen w-16 shrink-0 items-center justify-center md:flex">
-        <VerticalProgress progress={scrollYProgress} />
-      </div>
-
-      {/* conteúdo */}
-      <div className="flex-1 px-8 pb-28 pt-28">
+      {/* CONTAINER DO TÍTULO: Agora fica no topo (flex-col) e gruda ao atingir o topo da tela no desktop */}
+      <div 
+        className={`w-full bg-dark/90 backdrop-blur-sm ${
+          isDesktop ? "sticky top-0 pt-28 pb-8 z-30" : "pt-28 mb-16"
+        }`}
+      >
         <SectionTitle
           variant="outline"
-          className="mb-16 text-center text-6xl md:text-8xl"
+          className="text-center text-6xl md:text-8xl"
         >
           PROJETOS
         </SectionTitle>
+      </div>
 
+      {/* CONTAINER DOS CARDS: Rola normalmente abaixo do título */}
+      <div className="w-full pb-28 pt-4">
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-2">
           {projects.map((project, i) => (
             <ProjectCard key={i} project={project} />
