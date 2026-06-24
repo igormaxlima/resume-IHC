@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "motion/react";
 import SectionTitle from "@/components/Ui/SectionTitle";
 import ExperienceCard from "@/components/Ui/ExperienceCard";
 import ImagePlaceholder from "@/components/Ui/ImagePlaceholder";
-import HorizontalProgress from "@/components/Ui/HorizontalProgress";
 import { experiences } from "@/data/experiences";
 
 interface ExperienceBlockProps {
@@ -118,7 +117,6 @@ export default function ExperienceBlock({ isDesktop }: ExperienceBlockProps) {
           ))}
         </motion.div>
 
-        <HorizontalProgress progress={scrollYProgress} />
       </div>
     </section>
   );
